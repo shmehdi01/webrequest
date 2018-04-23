@@ -32,23 +32,17 @@ public class WebRequest {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                //c.onResponse(response,url);
+                                c.onResponse(response,url);
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                c.onErrorResponse(error,url,error.networkResponse.statusCode);
+                                c.onErrorResponse(error,url);
                             }
                         }
 
-                ){
-                    @Override
-                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                        c.onResponse(new String(response.data),url,response.statusCode);
-                        return super.parseNetworkResponse(response);
-                    }
-                });
+                ));
 
 
     }
@@ -68,7 +62,7 @@ public class WebRequest {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                c.onErrorResponse(error,url, error.networkResponse.statusCode);
+                                c.onErrorResponse(error,url);
                             }
                         }
                 ){
@@ -77,11 +71,6 @@ public class WebRequest {
                         return postData;
                     }
 
-                    @Override
-                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                        c.onResponse(new String(response.data),url,response.statusCode);
-                        return super.parseNetworkResponse(response);
-                    }
                 });
 
     }
@@ -97,12 +86,12 @@ public class WebRequest {
                     @Override
                     public void onResponse(NetworkResponse response) {
                         String resultResponse = new String(response.data);
-                        c.onResponse(resultResponse,url, response.statusCode);
+                        c.onResponse(resultResponse,url);
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        c.onErrorResponse(error,url, error.networkResponse.statusCode);
+                        c.onErrorResponse(error,url);
                     }
                 }));
     }
@@ -111,8 +100,8 @@ public class WebRequest {
 
     public interface Callback{
         public void preExecute(String url);
-        public void onResponse(String response, String url, int statusCode);
-        public void onErrorResponse(VolleyError error, String url, int statusCode);
+        public void onResponse(String response, String url);
+        public void onErrorResponse(VolleyError error, String url);
     }
 
 
