@@ -56,7 +56,7 @@ public class WebRequest {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                //c.onResponse(response,url);
+                                c.onResponse(response,url);
                             }
                         },
                         new Response.ErrorListener() {
